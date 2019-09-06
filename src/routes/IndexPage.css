@@ -1,0 +1,59 @@
+
+.normal {
+  width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+  border:1px solid #ccc;
+  box-shadow: 0 0 20px #ccc;
+}
+
+.record {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  color: #ccc;
+}
+
+.current {
+  text-align: center;
+  font-size: 40px;
+  padding: 40px 0;
+}
+
+.button {
+  text-align: center;
+}
+
+.button button {
+  text-align: center;
+  width: 100px;
+  height:40px;
+  background: #aaa;
+  color:#fff;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+}
+
+.welcome {
+  height: 328px;
+  background: url(../assets/yay.jpg) no-repeat center 0;
+  background-size: 388px 328px;
+}
+
+.list {
+  font-size: 1.2em;
+  margin-top: 1.8em;
+  list-style: none;
+  line-height: 1.5em;
+}
+
+.list code {
+  background: #f7f7f7;
+}
+
+.add {
+  margin-left: 5em;
+}

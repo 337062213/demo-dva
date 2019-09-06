@@ -1,0 +1,51 @@
+{
+  "name": "demo-dva",
+  "description": "one dva demo for react project",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "set PORT=8000&&roadhog server",
+    "build": "roadhog build",
+    "lint": "eslint --ext .js src test",
+    "precommit": "npm run lint",
+    "env": "env"
+  },
+  "dependencies": {
+    "antd": "^3.22.2",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-import": "^1.12.1",
+    "dva": "^2.4.1",
+    "echarts": "^4.2.1",
+    "jest": "^23.6.0",
+    "jquery": "^3.4.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.14.0",
+    "eslint-config-umi": "^0.1.1",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "husky": "^0.12.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "redbox-react": "^1.4.3",
+    "roadhog": "^2.5.0-beta.4",
+    "webpack": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-chunk-hash": "^0.6.0"
+  }
+}
