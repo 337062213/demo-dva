@@ -10,24 +10,30 @@ export default {
   },
 
   effects: {
-    * queryList ({ payload }, { call, put }) {
+    * queryList ({ payload }, {call, put}) {
+      debugger;
       console.log(payload);
       const rsp = yield call(groupService.queryList);
       console.log('groupService queryList');
       console.log(rsp.data);
       yield put({ type: 'saveList', payload: { groupList: rsp.data } });
     },
-    * deleteOne ({ payload }, { call, put }) {
+    * deleteOne ({ payload }, {call, put, select}) {
+      debugger;
       console.log('groupService delete one payload' + payload);
       yield call(groupService.deleteOne, payload);
-      yield put({ type: 'queryList' });
+      const groupModel = yield select((state) => state.groupModel);
+      console.log(groupModel);
+      yield put({ type: 'queryList', payload: {...groupModel} });
     },
-    * addOne ({ payload }, { call, put }) {
+    * addOne ({ payload }, {call, put}) {
+      debugger;
       const rsp = yield call(groupService.addOne, payload);
       yield put({ type: 'queryList' });
       return rsp;
     },
     * updateOne ({ payload }, { call, put }) {
+      debugger;
       console.log('groupService update' + payload);
       const rsp = yield call(groupService.updateOne, payload);
       yield put({ type: 'queryList' });

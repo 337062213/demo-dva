@@ -9,8 +9,8 @@ export default {
   },
 
   effects: {
-    
     * login ({ payload }, { call, put }) {
+      debugger;
       const rsp = yield call(loginService.login, payload);
       console.log('loginService login');
       console.log(rsp);
@@ -28,18 +28,17 @@ export default {
   reducers: {
     loginR (state, { payload: { loginData } }) {
       const zero = 0;
-      console.log('login success ? ' + (loginData.code === zero));
-      let isLogin = false;
       if (loginData.code === zero) {
-        isLogin = true;
+        console.log('login success ? ' + (loginData.code === zero));
         return {
           ...state,
-          isLogin,
+          isLogin: true,
         };
       } else {
+        console.log('login success ? ' + (loginData.code === zero));
         return {
           ...state,
-          isLogin,
+          isLogin: false,
         };
       }
     },

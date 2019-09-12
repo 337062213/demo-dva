@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Input, Button, Select} from 'antd';
-import UserModelCreate from '../user/userCreate';
+import UserCreate from '../user/UserCreate';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
@@ -34,11 +34,9 @@ class Search extends React.Component {
     const { name = []} = this.props.record;
     const groupList = JSON.parse(sessionStorage.getItem('groupList'));
     const results = groupList.map((group) => <Option key={group.id}>{group.groupName}</Option>);
-    // const results = [];
     return (
       <div>
         <Form layout="inline"
-          // className="ant-advanced-search-form"
           onSubmit={this.handleSearch}
         >
           <FormItem label={'姓名'}>
@@ -57,9 +55,9 @@ class Search extends React.Component {
           </FormItem>
           <div style={{ textAlign: 'right', float: 'right' }}>
             <div style={{float: 'left'}}>
-              <UserModelCreate onOk={this.handleCreate}>
+              <UserCreate onOk={this.handleCreate}>
                 <Button type='primary'>新建</Button>
-              </UserModelCreate>
+              </UserCreate>
             </div>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={this.handleSearch}>搜索</Button>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={this.handleReset}>重置</Button>
@@ -72,7 +70,6 @@ class Search extends React.Component {
 
 Search.propTypes = {
   onSearch: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
   record: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   onReset: PropTypes.func.isRequired,

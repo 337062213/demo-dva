@@ -1,10 +1,11 @@
 'use strict';
 
 const qs = require('qs');
-const mockjs = require('mockjs');  //导入mock.js的模块
-const Random = mockjs.Random;  //导入mock.js的随机数
-
-// 数据持久化   保存在global的全局变量中
+// 导入mock.js的模块
+const mockjs = require('mockjs');
+// 导入mock.js的随机数
+const Random = mockjs.Random;
+// 数据持久化保存在global的全局变量中
 let tableListData = {};
 
 if (!global.tableListData) {
@@ -12,38 +13,22 @@ if (!global.tableListData) {
     'data|10': [{
       'fid|+10': 10000,
       'gid|+1': 1,
-      'age': () => {
-        return Random.integer(18,24);
-      },
-      'sex': () => {
-        return Random.character('upper');
-      },
-      'name': () => {
-        return Random.cname();
-      },
-      'address': () => {
-        return Random.cname();
-      },
+      'age': () => (Random.integer(18, 24)),
+      'sex': () => (Random.character('upper')),
+      'name': () => (Random.cname()),
+      'address': () => (Random.cname()),
       'mobile': /1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}/,
-      'avatar': () => {
-        return Random.image('125x125');
-      },
+      'avatar': () => (Random.image('125x125')),
       'status|1-2': 1,
-      'email': () => {
-        return Random.email('visiondk.com');
-      },
+      'email': () => (Random.email('visiondk.com')),
       'isadmin|0-1': 1,
-      'created_at': () => {
-        return Random.datetime('yyyy-MM-dd HH:mm:ss');
-      },
-      'updated_at': () => {
-        return Random.datetime('yyyy-MM-dd HH:mm:ss');
-      },
+      'created_at': () => (Random.datetime('yyyy-MM-dd HH:mm:ss')),
+      'updated_at': () => (Random.datetime('yyyy-MM-dd HH:mm:ss')),
     }],
     page: {
       total: 100,
-      current: 1
-    }
+      current: 1,
+    },
   });
   tableListData = data;
   global.tableListData = tableListData;
@@ -52,24 +37,19 @@ if (!global.tableListData) {
 }
 
 module.exports = {
-  //post请求  /api/users/ 是拦截的地址   方法内部接受 request response对象
+  // post请求  /api/users/ 是拦截的地址 方法内部接受 request response对象
   'GET /mock/user' (req, res) {
     const page = qs.parse(req.query);
     const pageSize = page.pageSize || 10;
     const currentPage = page.page || 1;
-
     let data;
     let newPage;
     let newData = tableListData.data.concat();
 
-    //数据开始模拟
+    // 数据开始模拟
     if (page.field) {
-      const d = newData.filter((item) => {
-        return item[page.filed].indexOf(page.keyword) > -1;
-      });
-
+      const d = newData.filter((item) => (item[page.filed].indexOf(page.keyword) > -1));
       data = d.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-
       newPage = {
         current: currentPage * 1,
         total: d.length,
@@ -77,18 +57,18 @@ module.exports = {
     } else {
       data = tableListData.data.slice((currentPage - 1) * pageSize, currentPage * pageSize);
       tableListData.page.current = currentPage * 1;
-
       newPage = {
         current: tableListData.page.current,
         total: tableListData.page.total,
-      }
+      };
     }
     setTimeout(() => {
-      res.json({      //将请求json格式返回
+      res.json({
+        // 将请求json格式返回
         success: true,
         data,
         page: '123',
       });
     }, 200);
-  }
-}
+  },
+};

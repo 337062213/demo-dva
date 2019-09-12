@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class UserModelCreate extends React.Component {
+class UserCreate extends React.Component {
   constructor () {
     super();
     this.state = {
@@ -76,7 +76,7 @@ class UserModelCreate extends React.Component {
       <div>
         <span onClick={this.showModelHandler}>{children}</span>
         <Modal
-          title="新建记录"
+          title="新建用户记录"
           visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -138,10 +138,10 @@ class UserModelCreate extends React.Component {
   }
 }
 
-UserModelCreate.propTypes = {
+UserCreate.propTypes = {
   groupList: PropTypes.array,
   onOk: PropTypes.func.isRequired,
   form: PropTypes.object.isRequired,
   children: PropTypes.object.isRequired,
 };
-export default Form.create()(UserModelCreate);
+export default Form.create()(UserCreate);

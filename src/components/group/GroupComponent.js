@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Table, Button, Popconfirm} from 'antd';
-import GroupModify from './groupModify';
-import GroupCreate from './groupCreate';
+import GroupModify from './GroupModify';
+import GroupCreate from './GroupCreate';
 import PropTypes from 'prop-types';
 
 class GroupComponent extends React.Component {
@@ -10,7 +10,9 @@ class GroupComponent extends React.Component {
     const { groupList, onEdit, onAdd, onDelete} = this.props;
     const columns = [
       { title: 'ID', dataIndex: 'id' },
-      { title: '组名', dataIndex: 'name' },
+      { title: '组名', dataIndex: 'groupName' },
+      { title: '创建时间', dataIndex: 'creatTime' },
+      { title: '更新时间', dataIndex: 'updateTime' },
       { title: '操作', key: 'operation',
         render: (record) => (
           <span>
@@ -32,7 +34,7 @@ class GroupComponent extends React.Component {
           <Button type='primary'>新建</Button>
         </GroupCreate>
         <Table columns={columns} dataSource={groupList} rowKey="id"
-          pagination={{ pageSize: 5 }}/>
+          pagination={{ pageSize: 10 }}/>
       </div>
     );
   }

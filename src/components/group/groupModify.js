@@ -60,7 +60,7 @@ class GroupModify extends React.Component {
               })(<Input />)}
             </FormItem>
             <FormItem {...formItemLayout} label="组名">
-              {getFieldDecorator('name', {
+              {getFieldDecorator('groupName', {
                 initialValue: groupName,
               })(<Input />)}
             </FormItem>

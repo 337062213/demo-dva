@@ -2,8 +2,7 @@
 import { Layout, Menu, Breadcrumb, Icon, Row, Tabs, Switch } from 'antd';
 import React from 'react';
 import logo from '../../image/ico/internet/rss/rss_48px.ico';
-import BarDiagram from '../user/BarDiagram';
-import User from '../user/user';
+import BarDiagram from '../diagram/BarDiagram';
 import PropTypes from 'prop-types';
 const { Header, Content, Footer, Sider } = Layout;
 const { TabPane } = Tabs;
@@ -26,11 +25,12 @@ class SiderComponent extends React.Component {
       menus: menus,
     };
   }
-  onChange (activeKey) {
+
+  onChange = (activeKey) => {
     this.setState({ activeKey });
   }
 
-  onEdit (targetKey, action) {
+  onEdit = (targetKey, action) => {
     this[action](targetKey);
   }
 
@@ -40,7 +40,7 @@ class SiderComponent extends React.Component {
    * @param {String} activeKey new tab key
    * @returns {null} new one table window
    * */
-  add (title, content, activeKey) {
+  add = (title, content, activeKey) => {
     const { panes } = this.state;
     const keyprix = activeKey + this.newTabIndex[0]++;
     const titleprix = title + this.newTabIndex[1]++;
@@ -48,7 +48,7 @@ class SiderComponent extends React.Component {
     this.setState({ panes, activeKey: keyprix });
   }
 
-  toRouter () {
+  toRouter = () => {
     const host = window.location.host;
     window.parent.postMessage(
       JSON.stringify({isAddRoute: true,
@@ -58,7 +58,7 @@ class SiderComponent extends React.Component {
     );
   }
 
-  remove (targetKey) {
+  remove = (targetKey) => {
     let { activeKey } = this.state;
     let lastIndex;
     this.state.panes.forEach((pane, i) => {
@@ -79,19 +79,19 @@ class SiderComponent extends React.Component {
     this.setState({ panes, activeKey });
   }
 
-  handleClick (e) {
+  handleClick = (e) => {
     this.setState({
       current: e.key,
     });
   }
 
-  changeTheme (value) {
+  changeTheme = (value) => {
     this.setState({
       theme: value ? 'dark' : 'light',
     });
   }
 
-  toggle () {
+  toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
@@ -105,8 +105,6 @@ class SiderComponent extends React.Component {
         ydata2: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
       },
     };
-    const { userList, name, gid, onEdit, onAdd, onDelete, onSearch, onReset } = this.props;
-    const userprops = { userList, name, gid, onEdit, onAdd, onDelete, onSearch, onReset };
     const rediv = <BarDiagram data = {data} key={this.newTabIndex[3]++}/>;
 
     return (
@@ -122,7 +120,7 @@ class SiderComponent extends React.Component {
           <Menu theme={this.state.theme} mode="inline" defaultSelectedKeys={['1']}>
             <SubMenu key="sub1" title={<span><Icon type="video-camera" /><span>导航一</span></span>}>
               <Menu.Item key="1"><Icon type="caret-right" /><span onClick={() => this.add('nav 1-', rediv, 'nav 1')}>选项1</span></Menu.Item>
-              <Menu.Item key="2"><Icon type="caret-right" /><span onClick={() => this.add('nav 2-', <User {...userprops}/>, 'nav 2')}>选项2</span></Menu.Item>
+              <Menu.Item key="2"><Icon type="caret-right" /><span onClick={() => this.add('nav 2-', 'test', 'nav 2')}>选项2</span></Menu.Item>
               <SubMenu key="sub1-1" title={<span><Icon type="camera-o" /><span>三级导航</span></span>}>
                 <Menu.Item key="3"><Icon type="caret-right" /><span onClick={() => this.toRouter()}>选项3</span></Menu.Item>
                 <Menu.Item key="4"><Icon type="caret-right" /><span>选项4</span></Menu.Item>
@@ -202,7 +200,6 @@ class SiderComponent extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             Ant Design ©2016 Created by Ant UED
           </Footer>
-          <User {...userprops}/>
         </Layout>
       </Layout>
     );

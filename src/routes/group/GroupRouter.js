@@ -1,6 +1,6 @@
 import { connect } from 'dva';
 import React from 'react';
-import GroupComponent from '../../components/group/group';
+import GroupComponent from '../../components/group/GroupComponent';
 import PropTypes from 'prop-types';
 class GroupRouter extends React.Component {
   render () {

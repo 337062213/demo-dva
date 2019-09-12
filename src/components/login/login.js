@@ -24,14 +24,20 @@ class Login extends React.Component {
         <div>
           <div>This is Home!</div>
           <div>
+            <Link to="/index" style={{color: 'black'}}>
+              <div><Icon type="caret-right"/>点击跳转到dva</div>
+            </Link>
             <Link to="/user" style={{color: 'black'}}>
-              <div>点击跳转到user</div>
+              <div><Icon type="caret-right"/>点击跳转到user</div>
             </Link>
             <Link to="/group" style={{color: 'black'}}>
-              <div>点击跳转到group</div>
+              <div><Icon type="caret-right"/>点击跳转到group</div>
             </Link>
-            <Link to="/list" style={{color: 'black'}}>
-              <div>点击跳转到list</div>
+            <Link to="/" style={{color: 'black'}}>
+              <div><Icon type="caret-right"/>点击跳转到default</div>
+            </Link>
+            <Link to="/mock" style={{color: 'black'}}>
+              <div><Icon type="caret-right"/>点击跳转到mock</div>
             </Link>
           </div>
         </div>
@@ -53,7 +59,6 @@ class Login extends React.Component {
               <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type='password' placeholder='Password' />
             )}
           </FormItem>
-
           <FormItem>
             <Button type="primary" htmlType="submit" className="login-form-button">
               登陆

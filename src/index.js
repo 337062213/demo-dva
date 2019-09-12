@@ -8,11 +8,10 @@ const app = dva();
 
 // 3. Model
 app.model(require('./models/example')['default']);
-app.model(require('./models/production/production')['default']);
-app.model(require('./models/group/groupModel')['default']);
-app.model(require('./models/mock/mock')['default']);
-app.model(require('./models/user/user')['default']);
-app.model(require('./models/login/loginRoute')['default']);
+app.model(require('./models/group/GroupModel')['default']);
+app.model(require('./models/mock/MockModel')['default']);
+app.model(require('./models/user/UserModel')['default']);
+app.model(require('./models/login/LoginModel')['default']);
 // 4. Router
 app.router(require('./router')['default']);
 

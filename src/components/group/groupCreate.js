@@ -49,15 +49,15 @@ class GroupCreate extends React.Component {
           onCancel={this.handleCancel}
         >
           <Form>
-            <FormItem label="ID">
+            <FormItem label="ID" style={{ display: 'none' }}>
               {getFieldDecorator('id', {
-                rules: [{ required: true }],
+                rules: [{ required: false}],
               })(
                 <Input />
               )}
             </FormItem>
             <FormItem label="组名">
-              {getFieldDecorator('name', {
+              {getFieldDecorator('groupName', {
                 rules: [{ required: true }],
               })(
                 <Input />

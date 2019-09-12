@@ -1,5 +1,5 @@
 import * as groupService from '../../services/group';
-import * as userService from '../../services/user';
+import * as userService from '../../services/User';
 
 export default {
   namespace: 'user',

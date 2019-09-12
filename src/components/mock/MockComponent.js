@@ -2,7 +2,6 @@ import React from 'react';
 import {Form, Table, Popconfirm} from 'antd';
 import PropTypes from 'prop-types';
 import MockUpdate from './MockUpdate';
-import MockCheckFields from './MockCheckFields';
 import MockCreate from './MockCreate';
 
 class MockComponent extends React.Component {
@@ -28,9 +27,6 @@ class MockComponent extends React.Component {
               <MockCreate record={record.uid} onOk={ (values) => {onAdd(values);}}>
                 <a>新建</a><br/>
               </MockCreate>
-              <MockCheckFields record={record.uid} onOk={ () => {onEdit(record);}}>
-                <a>检查</a><br/>
-              </MockCheckFields>
             </div>
             <div>
               <MockUpdate record={record} onOk={ (record) => {onEdit(record);}}>
@@ -52,9 +48,9 @@ class MockComponent extends React.Component {
     };
     return (
       <div>
-        <Table rowSelection={mockList.length ? rowSelection : null} rowKey = {(record, index) => (index)}
+        <Table rowSelection={mockList.length ? rowSelection : null} rowKey = {(index) => (index)}
           columns={columns} dataSource={mockList}
-          pagination={{ pageSize: 7 }} onRowClick={this.onRowClick}/>
+          pagination={{ pageSize: 8 }} onRowClick={this.onRowClick}/>
       </div>
     );
   }

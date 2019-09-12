@@ -4,9 +4,10 @@ import Login from '../../components/login/login';
 
 class LoginRoute extends React.Component {
   render () {
-    const { dispatch } = this.props;
+    const { dispatch, login } = this.props;
+    const {isLogin} = login;
     const loginPros = {
-      isLogin: false,
+      isLogin: isLogin,
       onLogin: (values) => {
         dispatch({
           type: 'login/login',

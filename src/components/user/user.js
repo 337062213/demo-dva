@@ -12,8 +12,10 @@ class User extends React.Component {
     const columns = [
       { title: 'ID', dataIndex: 'fid', width: '21%', className: styles.center},
       { title: '姓名', dataIndex: 'name', width: '12.5%', className: styles.center},
-      { title: '年龄', dataIndex: 'age', width: '12.5%', className: styles.center},
-      { title: '性别', dataIndex: 'sex', width: '12.5%', className: styles.center},
+      { title: '年龄', dataIndex: 'age', width: '4.5%', className: styles.center},
+      { title: '性别', dataIndex: 'sex', width: '4.5%', className: styles.center},
+      { title: '创建时间', dataIndex: 'creatTime', width: '8%', className: styles.center},
+      { title: '修改时间', dataIndex: 'updateTime', width: '8%', className: styles.center},
       { title: '组别', key: 'gid', width: '12.5%', className: styles.center,
         render: (record) => {
           let groupname = groupList.filter((item) => item.id === record.gid)[0];

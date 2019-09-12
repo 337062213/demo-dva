@@ -1,5 +1,5 @@
 import { connect } from 'dva';
-import User from '../../components/user/user';
+import User from '../../components/user/User';
 import React from 'react';
 import PropTypes from 'prop-types';
 class UserRouter extends React.Component {
