@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form, Input, Button, Select} from 'antd';
 import UserCreate from '../user/UserCreate';
+import {download} from '../../utils/FileService';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
@@ -61,6 +62,8 @@ class Search extends React.Component {
             </div>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={this.handleSearch}>搜索</Button>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={this.handleReset}>重置</Button>
+            <Button style={{ marginLeft: 8 }} type="primary" onClick={() => download('http://localhost:8502/api/excel/get/user', '', '2003')}>导出2003</Button>
+            <Button style={{ marginLeft: 8 }} type="primary" onClick={() => download('http://localhost:8502/api/excel/get/user', '', '2007')}>导出2007</Button>
           </div>
         </Form>
       </div>

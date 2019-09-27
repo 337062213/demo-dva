@@ -6,12 +6,13 @@ class UserRouter extends React.Component {
 
   render () {
     const { dispatch, user } = this.props;
-    const { userList, name, gid } = user;
+    const { userList, name, gid, report } = user;
 
     const userPros = {
       userList,
       name,
       gid,
+      report,
       onEdit: (values) => {
         dispatch({
           type: 'user/updateOne',
@@ -40,6 +41,19 @@ class UserRouter extends React.Component {
       onReset: () => {
         dispatch({
           type: 'user/queryList',
+        });
+      },
+
+      onFlag: (values) => {
+        document.getElementById('reportFrame').contentWindow.postMessage('_g().verifyAndWriteReport()', 'http://localhost:8075');
+        window.addEventListener('message', function (event) {
+          values.reportId = event.data.reportId;
+          values.iframeId = document.getElementById('reportFrame').id;
+          console.log(JSON.stringify(event.data));
+          dispatch({
+            type: 'user/saveFlag',
+            payload: values,
+          });
         });
       },
 

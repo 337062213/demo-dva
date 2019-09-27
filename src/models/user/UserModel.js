@@ -4,7 +4,10 @@ import * as userService from '../../services/User';
 export default {
   namespace: 'user',
   state: {
+    // 用户数组
     userList: [],
+    flag: [],
+    report: {},
     name: '',
     gid: '',
   },
@@ -17,7 +20,7 @@ export default {
       yield sessionStorage.setItem('groupList', JSON.stringify(rsp1.data));
       const rsp = yield call(userService.queryList, name, gid);
       console.log(rsp.data);
-      yield put({ type: 'saveList', payload: { userList: rsp.data, name: name, gid: gid }});
+      yield put({ type: 'saveList', payload: { userList: rsp.data}});
     },
     * deleteOne ({ payload }, { select, call, put }) {
       yield call(userService.deleteOne, payload);
@@ -39,27 +42,30 @@ export default {
       yield put({ type: 'queryList', payload: { ...user } });
       return rsp;
     },
+    * saveFlag ({ payload }, {put, select}) {
+      const user = yield select((state) => state.user);
+      yield put({ type: 'saveList', payload: { ...user, report: payload, flag: payload.flag } });
+    },
   },
 
   reducers: {
-    saveList (state, { payload: { userList, name, gid } }) {
+    saveList (state, { payload }) {
       return {
         ...state,
-        userList,
-        name,
-        gid,
+        ...payload,
       };
     },
   },
   subscriptions: {
     setup ({ dispatch, history }) {
-      window.addEventListener('message', function (e) {
-        const name = JSON.parse(e.data).name;
-        const route = JSON.parse(e.data).route;
-        if (name === 'user') {
-          location.href = route;
-        }
-      });
+      // 侦听是否需要切换路径
+      // window.addEventListener('message', function (e) {
+      //   const name = JSON.parse(e.data).name;
+      //   const route = JSON.parse(e.data).route;
+      //   if (name === 'user') {
+      //     location.href = route;
+      //   }
+      // });
       return history.listen((pathname, query) => {
         if (pathname.pathname === '/user') {
           dispatch({
