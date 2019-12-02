@@ -9,87 +9,81 @@ import 'echarts/lib/component/toolbox';
 import 'echarts/lib/component/markPoint';
 import 'echarts/lib/component/markLine';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
-
 
 class BarDiagram extends React.Component {
 
-  render () {
-    const inital = () => {
-      var myChart = echarts.init(document.getElementById('lineChart'));
-      // 绘制图表
-      myChart.setOption({
-        title: { text: '某地区蒸发量和降水量' },
-        tooltip: {
-          trigger: 'axis',
-        },
-        legend: {
-          data: ['蒸发量', '降水量'],
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            dataView: {show: true, readOnly: false},
-            magicType: {show: true, type: ['line', 'bar']},
-            restore: {show: true},
-            saveAsImage: {
-              show: true,
-              type: 'jpg',
-            },
+  componentDidMount () {
+    var myChart = echarts.init(document.getElementById('lineChart'));
+    // 绘制图表
+    myChart.setOption({
+      title: { text: '某地区蒸发量和降水量' },
+      tooltip: {
+        trigger: 'axis',
+      },
+      legend: {
+        data: ['蒸发量', '降水量'],
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          dataView: {show: true, readOnly: false},
+          magicType: {show: true, type: ['line', 'bar']},
+          restore: {show: true},
+          saveAsImage: {
+            show: true,
+            type: 'jpg',
           },
         },
-        xAxis: [
-          {
-            type: 'category',
-            data: this.props.data.xdata,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: this.props.data.xdata,
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+        },
+      ],
+      series: [
+        {
+          name: '蒸发量',
+          type: 'bar',
+          data: this.props.data.ydata.ydata1,
+          markPoint: {
+            data: [
+              { type: 'max', name: '最大值' },
+              { type: 'min', name: '最小值' },
+            ],
           },
-        ],
-        yAxis: [
-          {
-            type: 'value',
+          markLine: {
+            data: [
+              { type: 'average', name: '平均值'},
+            ],
           },
-        ],
-        series: [
-          {
-            name: '蒸发量',
-            type: 'bar',
-            data: this.props.data.ydata.ydata1,
-            markPoint: {
-              data: [
-                { type: 'max', name: '最大值' },
-                { type: 'min', name: '最小值' },
-              ],
-            },
-            markLine: {
-              data: [
-                { type: 'average', name: '平均值'},
-              ],
-            },
+        },
+        {
+          name: '降水量',
+          type: 'bar',
+          data: this.props.data.ydata.ydata2,
+          markPoint: {
+            data: [
+              { type: 'max', name: '最大值' },
+              { type: 'min', name: '最小值' },
+            ],
           },
-          {
-            name: '降水量',
-            type: 'bar',
-            data: this.props.data.ydata.ydata2,
-            markPoint: {
-              data: [
-                { type: 'max', name: '最大值' },
-                { type: 'min', name: '最小值' },
-              ],
-            },
-            markLine: {
-              data: [
-                { type: 'average', name: '平均值' },
-              ],
-            },
+          markLine: {
+            data: [
+              { type: 'average', name: '平均值' },
+            ],
           },
-        ],
-      });
-    };
-    $(document).ready(function () {
-      // 初始化
-      inital();
+        },
+      ],
     });
+  }
 
+  render () {
     return (
       <div id="lineChart" style={{ width: '100%', height: 600 }}></div>
     );

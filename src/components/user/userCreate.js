@@ -38,8 +38,7 @@ class UserCreate extends React.Component {
 
   render () {
     const { visible } = this.state;
-    const { children, form: { getFieldDecorator } } = this.props;
-    const groupList = JSON.parse(sessionStorage.getItem('groupList'));
+    const { children, groupList, form: { getFieldDecorator } } = this.props;
     const results = groupList.map((group) => <Option key={group.id}>{group.groupName}</Option>);
     const formData = new FormData();
     formData.append('fid', 'test');

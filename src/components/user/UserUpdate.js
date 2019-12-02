@@ -9,25 +9,8 @@ class UserUpdate extends React.Component {
     super(props);
     this.state = {
       visible: false,
-      someThings: props.someThings,
     };
   }
-
-  /**
-   * @description 每当父组件重新渲染，重新传递Props到子组件，子组件都需要重新渲染，应该使用这个方法进行优化，
-   *  否则无论props是否有变化都将会导致子组件跟着重新渲染.
-   * @param {element} nextProps will be render.
-   * @returns {boolean} will be rendered if return true, otherwise not.
-  */
-  // shouldComponentUpdate (nextProps) {
-  //   if (nextProps.someThings === this.props.someThings) {
-  //     return false;
-  //   }
-  // }
-
-  // componentWillReceiveProps (nextProps) { // 父组件重传props时就会调用这个方法
-  //   this.setState({someThings: nextProps.someThings});
-  // }
 
   showModelHandler = () => {
     this.setState({
@@ -52,10 +35,8 @@ class UserUpdate extends React.Component {
   }
 
   render () {
-    const { children } = this.props;
+    const { children, groupList, fid, name, age, gid, sex, address } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { fid, name, age, gid, sex, address } = this.props.record;
-    const groupList = JSON.parse(sessionStorage.getItem('groupList'));
     const results = groupList.map((group) => <Option key={group.id}>{group.groupName}</Option>);
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -65,7 +46,7 @@ class UserUpdate extends React.Component {
       <div style={{float: 'left'}}>
         <span onClick={this.showModelHandler}>{children}</span>
         <Modal
-          title="Edit User"
+          title="Update User"
           visible={this.state.visible}
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
@@ -115,7 +96,6 @@ class UserUpdate extends React.Component {
   }
 }
 UserUpdate.propTypes = {
-  record: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
   children: PropTypes.array.isRequired,
   onOk: PropTypes.func.isRequired,

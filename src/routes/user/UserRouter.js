@@ -6,9 +6,10 @@ class UserRouter extends React.Component {
 
   render () {
     const { dispatch, user } = this.props;
-    const { userList, name, gid, report } = user;
+    const { userList, name, gid, report, groupList } = user;
 
     const userPros = {
+      groupList,
       userList,
       name,
       gid,

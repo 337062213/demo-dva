@@ -1,10 +1,12 @@
 import dva from 'dva';
 import './index.css';
+import * as serviceWorker from './service';
 // 1. Initialize
 const app = dva();
 
 // 2. Plugins
 // app.use({});
+serviceWorker.unregister();
 
 // 3. Model
 app.model(require('./models/example')['default']);

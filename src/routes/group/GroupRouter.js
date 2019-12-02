@@ -1,6 +1,6 @@
 import { connect } from 'dva';
 import React from 'react';
-import GroupComponent from '../../components/group/GroupComponent';
+import Group from '../../components/group/Group';
 import PropTypes from 'prop-types';
 class GroupRouter extends React.Component {
   render () {
@@ -30,7 +30,7 @@ class GroupRouter extends React.Component {
     };
     return (
       <div>
-        <GroupComponent {...groupPros}/>
+        <Group {...groupPros}/>
       </div>
     );
   }

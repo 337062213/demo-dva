@@ -3,7 +3,6 @@ import {Table, Form, Popconfirm, Tooltip} from 'antd';
 import UserUpdate from './UserUpdate';
 import styles from '../../index.css';
 import Search from '../search/search';
-import {download} from '../../utils/FileService';
 import PropTypes from 'prop-types';
 import jQuery from 'jquery';
 
@@ -75,8 +74,10 @@ class User extends React.Component {
   }
 
   render () {
-    const { userList, name, gid, onEdit, onAdd, onDelete, onSearch, onReset, onFlag, report } = this.props;
-    const groupList = JSON.parse(sessionStorage.getItem('groupList'));
+    const { userList, name, gid, onEdit, onAdd, onDelete, onSearch, onReset, onFlag, report, groupList } = this.props;
+    const searchProps = {
+      groupList,
+    };
     const columns = [
       { title: 'ID', dataIndex: 'fid', width: '21%', className: styles.center},
       { title: '姓名', dataIndex: 'name', width: '12.5%', className: styles.center},
@@ -86,10 +87,9 @@ class User extends React.Component {
       { title: '修改时间', dataIndex: 'updateTime', width: '8%', className: styles.center},
       { title: '组别', key: 'gid', width: '12.5%', className: styles.center,
         render: (record) => {
-          let groupname = groupList.filter((item) => item.id === record.gid)[0];
-          if (groupname) {
-            let title = groupname.groupName + ' ID 是' + groupname.id;
-            return <span style={{cursor: 'pointer'}}><Tooltip placement='top' title={title}>{groupname.groupName}</Tooltip></span>;
+          let groupItem = groupList.filter((item) => item.id === record.gid)[0];
+          if (groupItem) {
+            return <span style={{cursor: 'pointer'}}><Tooltip placement='top' title={groupItem.groupName}>{groupItem.groupName}</Tooltip></span>;
           }
         },
       },
@@ -100,7 +100,7 @@ class User extends React.Component {
       { title: '操作', key: 'operation', className: styles.center, width: '8%',
         render: (record) => (
           <div>
-            <UserUpdate record={record} onOk={ (values) => {onEdit(values);}}>
+            <UserUpdate {...searchProps} {...record} onOk={ (record) => {onEdit(record);}}>
               <a>更新</a><br/>
             </UserUpdate>
             <Popconfirm
@@ -117,8 +117,12 @@ class User extends React.Component {
     // const url = 'http://10.0.10.220/FineReport/ReportServer?reportlet=jsbim-reportlets/QualityReport/孔隙水压力观测记录 (2).cpt&op=write';
     return (
       <div>
-        <Search style={{float: 'right'}} record={ { name: name, gid: gid }} onAdd={ (values) => {onAdd(values);} } onSearch={ (values) => {onSearch(values);} } onReset={() => {onReset();}}>
+        <Search {...searchProps} style={{float: 'right'}} record={ { name: name, gid: gid }} onAdd={ (values) => {onAdd(values);} }
+          onSearch={ (values) => {onSearch(values);} } onReset={() => {onReset();}}>
         </Search>
+        <div style={{animation: 'twinkling 2s infinite 0.9s ease-in-out alternate'}}>
+          nihao
+        </div>
         <Table columns={columns} dataSource={userList} rowKey="fid"
           pagination={{ pageSize: 14 } }
         />

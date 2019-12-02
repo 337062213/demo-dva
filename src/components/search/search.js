@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form, Input, Button, Select} from 'antd';
 import UserCreate from '../user/UserCreate';
-import {download} from '../../utils/FileService';
+import {download, downloadPDF} from '../../utils/FileService';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
@@ -32,8 +32,11 @@ class Search extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form;
+    const { groupList } = this.props;
+    const userCreateProps = {
+      groupList,
+    };
     const { name = []} = this.props.record;
-    const groupList = JSON.parse(sessionStorage.getItem('groupList'));
     const results = groupList.map((group) => <Option key={group.id}>{group.groupName}</Option>);
     return (
       <div>
@@ -56,7 +59,7 @@ class Search extends React.Component {
           </FormItem>
           <div style={{ textAlign: 'right', float: 'right' }}>
             <div style={{float: 'left'}}>
-              <UserCreate onOk={this.handleCreate}>
+              <UserCreate {...userCreateProps} onOk={this.handleCreate}>
                 <Button type='primary'>新建</Button>
               </UserCreate>
             </div>
@@ -64,6 +67,7 @@ class Search extends React.Component {
             <Button style={{ marginLeft: 8 }} type="primary" onClick={this.handleReset}>重置</Button>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={() => download('http://localhost:8502/api/excel/get/user', '', '2003')}>导出2003</Button>
             <Button style={{ marginLeft: 8 }} type="primary" onClick={() => download('http://localhost:8502/api/excel/get/user', '', '2007')}>导出2007</Button>
+            <Button style={{ marginLeft: 8 }} type="primary" onClick={() => downloadPDF('http://localhost:8502/api/pdf/get/pdf')}>导出pdf</Button>
           </div>
         </Form>
       </div>

@@ -3,6 +3,8 @@ import { Layout, Menu, Breadcrumb, Icon, Row, Tabs, Switch } from 'antd';
 import React from 'react';
 import logo from '../../image/ico/internet/rss/rss_48px.ico';
 import BarDiagram from '../diagram/BarDiagram';
+import BarCalender from '../diagram/BarCalender';
+import EchartsRadar from '../diagram/EchartsRadar';
 import PropTypes from 'prop-types';
 const { Header, Content, Footer, Sider } = Layout;
 const { TabPane } = Tabs;
@@ -105,8 +107,9 @@ class SiderComponent extends React.Component {
         ydata2: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
       },
     };
-    const rediv = <BarDiagram data = {data} key={this.newTabIndex[3]++}/>;
-
+    const rediv1 = <BarDiagram data = {data} key={this.newTabIndex[3]++}/>;
+    const rediv2 = <EchartsRadar data = {data} key={this.newTabIndex[2]++}/>;
+    const rediv3 = <BarCalender data = {data} key={this.newTabIndex[3]++}/>;
     return (
       <Layout>
         <Sider
@@ -119,11 +122,11 @@ class SiderComponent extends React.Component {
           <Switch size={'small'} onChange={this.changeTheme} checkedChildren="暗" unCheckedChildren="亮" />
           <Menu theme={this.state.theme} mode="inline" defaultSelectedKeys={['1']}>
             <SubMenu key="sub1" title={<span><Icon type="video-camera" /><span>导航一</span></span>}>
-              <Menu.Item key="1"><Icon type="caret-right" /><span onClick={() => this.add('nav 1-', rediv, 'nav 1')}>选项1</span></Menu.Item>
-              <Menu.Item key="2"><Icon type="caret-right" /><span onClick={() => this.add('nav 2-', 'test', 'nav 2')}>选项2</span></Menu.Item>
+              <Menu.Item key="1"><Icon type="caret-right" /><span onClick={() => this.add('nav 1-', rediv1, 'nav 1')}>选项1</span></Menu.Item>
+              <Menu.Item key="2"><Icon type="caret-right" /><span onClick={() => this.add('nav 2-', rediv2, 'nav 2')}>选项2</span></Menu.Item>
               <SubMenu key="sub1-1" title={<span><Icon type="camera-o" /><span>三级导航</span></span>}>
                 <Menu.Item key="3"><Icon type="caret-right" /><span onClick={() => this.toRouter()}>选项3</span></Menu.Item>
-                <Menu.Item key="4"><Icon type="caret-right" /><span>选项4</span></Menu.Item>
+                <Menu.Item key="4"><Icon type="caret-right" /><span onClick={() => this.add('nav 3-', rediv3, 'nav 3')}>选项4</span></Menu.Item>
               </SubMenu>
             </SubMenu>
             <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>导航二</span></span>}>
